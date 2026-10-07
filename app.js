@@ -32,7 +32,7 @@
     state.shelves[state.shelf] = { custom: state.custom, threads: state.threads, blurbs: state.blurbs };
     localStorage.setItem(KEY, JSON.stringify(state));
   }
-  function esc(v = "") { return String(v).replace(/[&<>"']/g, (c) => ({ "&": "&", "<": "<", ">": ">", '"': """, "'": "&#39;" }[c])); }
+  function esc(v) { return String(v == null ? '' : v).replace(/&/g, '&').replace(/</g, '<').replace(/>/g, '>'); }
   function people() { return [...builtins, ...state.custom]; }
   function person(id) { return people().find((p) => p.id === id) || builtins[0]; }
   function portrait(p) { return p.photo || ART[p.id] || ART.egg; }
